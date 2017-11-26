@@ -3,6 +3,7 @@ package transformadores;
 import java.security.MessageDigest;
 
 import fractal.*;
+import fractalFinal.*;
 
 /**
  * Compone la estructura de los transformadores en diferentes formatos.
@@ -101,5 +102,21 @@ public abstract class Transformador {
 	public Fractal getFractal() {
 		return fractal;
 	}// fin getFractal
+
+	/**
+	 * Calcula el tamaño de los bloques cuando el usuario no especifica un tamaño
+	 * concreto.
+	 * 
+	 * @return el tamaño de los bloques
+	 */
+	protected int setTamBloquesAleatorio() {
+		int tamBloquesAleatorio = 0;
+		int i = 0;
+		while (i < parametros[0].length) {
+			tamBloquesAleatorio += parametros[0][i];
+		}
+		tamBloquesAleatorio /= i;
+		return tamBloquesAleatorio;
+	}// fin setTamBloquesAleatorio
 
 }// fin Transformador

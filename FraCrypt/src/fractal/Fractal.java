@@ -2,6 +2,8 @@ package fractal;
 
 import java.util.ArrayList;
 
+import relojes.Cronometro;
+
 /**
  * Genera las distintas listas de puntos necesarios para formar el fractal según
  * la función de escape seleccionada.
@@ -87,6 +89,10 @@ public abstract class Fractal {
 	 */
 	public void calculaLosConjuntos(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
+		
+		Cronometro cr = new Cronometro(); // Benchmarking
+		cr.start(); // Benchmarking
+		
 		// Conjunto de multiplicadores necesarios para generar iterativamente todos los
 		// puntos del espacio n-dimensional
 		double[] multiplicadores = new double[dimensiones.length];
@@ -108,6 +114,9 @@ public abstract class Fractal {
 			puntosTotales++; // Benchmarking
 			calculaElConjuntoDelPunto(coordenadas, coordenadasCentro, iteraciones, limite, escala);
 		}
+		cr.stop(); // Benchmarking
+		System.out.println("Tiempo para generar el fractal: " + cr.toString()); // Benchmarking
+		cr.reset(); // Benchmarking
 	}// fin calculaLosConjuntos
 
 	/**

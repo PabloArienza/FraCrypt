@@ -7,12 +7,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 
-import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import javax.swing.border.TitledBorder;
-import javax.swing.event.DocumentListener;
 
 import transformadores.Transformador;
 import transformadores.Transformador2DEnBloques;
@@ -21,15 +19,8 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.awt.event.FocusAdapter;
-import java.awt.event.FocusEvent;
 
 public class InterfazEncriptacion extends JFrame {
 

@@ -16,7 +16,7 @@ import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 
-import transformadores.Transformador2DEnBloques;
+import transformadores.*;
 
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
@@ -98,13 +98,12 @@ public class IntEnc extends JFrame{
 					int tamBloques = Integer.parseInt(respuesta);
 					if(tamBloques == 0) {
 						
-					}else {
-						try {
-							Transformador2DEnBloques t = new Transformador2DEnBloques(password, archivoOrigen, destino, tamBloques, fractalSeleccionado);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
+					}
+					try {
+						Transformador2DEnBloques t = new Transformador2DEnBloques(password, archivoOrigen, destino, tamBloques, fractalSeleccionado);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
 					}
 					break;
 				}

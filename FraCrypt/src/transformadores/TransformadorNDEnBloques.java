@@ -7,7 +7,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import fractal.*;
-import fractalFinal.FractalNDimensionalSimple;
+import fractalFinal.*;
+import relojes.Cronometro;
 
 /**
  * Transforma un fichero en bloques de bytes
@@ -57,13 +58,20 @@ public class TransformadorNDEnBloques extends TransformadorND {
 		} else {
 			nombre += extension;
 		}
+		Cronometro cr = new Cronometro(); // Benchmarking
+		cr.start(); // Benchmarking
 		transformar(archivoOrigen, destino, nombre);
+		cr.stop(); // Benchmarking
+		System.out.println("Tiempo para encriptar el archivo: " + cr.toString()); // Benchmarking
+		cr.reset(); // Benchmarking
 	}// fin del constructor
 
 	@Override
 	protected void transformar(File archivoOrigen, File destino, String nombre) throws IOException {
 		FileInputStream fis = new FileInputStream(archivoOrigen);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
+		if (tamBloques == 0)
+			tamBloques = setTamBloquesAleatorio();
 		// Los datos es extraen en bloques a un buffer
 		byte[] buf = new byte[tamBloques];
 		// Se altera el punto de inicio del algoritmo

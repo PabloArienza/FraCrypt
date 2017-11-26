@@ -2,9 +2,7 @@ package fractalFinal;
 
 import java.util.ArrayList;
 
-import fractal.ConjuntoDePuntos;
-import fractal.Fractal;
-import fractal.Punto;
+import fractal.*;
 
 /**
  * Genera un fractal de Mandelbrot con la función f(z) = cos(z) + 1/c.
