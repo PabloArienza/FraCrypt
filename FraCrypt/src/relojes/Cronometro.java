@@ -18,7 +18,7 @@ public class Cronometro {
 	/**
 	 * Almacena el momento en el que se inicia el cronómetro.
 	 */
-	public void start() {
+	public void iniciar() throws IllegalStateException{
 		if (corriendo) {
 			throw new IllegalStateException("No se puede empezar el reloj porque ya ha empezado.");
 		}
@@ -29,11 +29,12 @@ public class Cronometro {
 	/**
 	 * Almacena el momento en el que se para el cronómetro.
 	 */
-	public void stop() {
+	public void parar() {
 		if (!corriendo) {
 			throw new IllegalStateException("No se puede parar el reloj porque no ha empezado.");
 		}
 		fin = System.currentTimeMillis();
+		corriendo = false;
 	}// fin stop
 
 	/**

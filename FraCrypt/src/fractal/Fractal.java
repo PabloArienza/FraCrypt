@@ -15,6 +15,26 @@ public abstract class Fractal {
 
 	protected ArrayList<ConjuntoDePuntos> fractal;
 	protected int ultimoLeido;
+	
+	/**
+	 * Constructor de la clase.
+	 * 
+	 * @param dimensiones
+	 *            el tamaño de las dimensiones del espacio
+	 * @param coordenadasCentro
+	 *            el centro relativo del espacio n-dimensional
+	 * @param iteraciones
+	 *            el número máximo de veces que se iterará cada punto
+	 * @param limite
+	 *            el valor máximo de la función de escape
+	 * @param escala
+	 *            el modificador de la función de escape
+	 */
+	public Fractal(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite, int escala) {
+		this.fractal = new ArrayList<ConjuntoDePuntos>();
+		this.ultimoLeido = 0;
+		calculaLosConjuntos(dimensiones, coordenadasCentro, iteraciones, limite, escala);
+	}// fin del constructor
 
 	/*
 	 * *************************************************************************
@@ -91,7 +111,7 @@ public abstract class Fractal {
 			int escala) {
 		
 		Cronometro cr = new Cronometro(); // Benchmarking
-		cr.start(); // Benchmarking
+		cr.iniciar(); // Benchmarking
 		
 		// Conjunto de multiplicadores necesarios para generar iterativamente todos los
 		// puntos del espacio n-dimensional
@@ -114,7 +134,7 @@ public abstract class Fractal {
 			puntosTotales++; // Benchmarking
 			calculaElConjuntoDelPunto(coordenadas, coordenadasCentro, iteraciones, limite, escala);
 		}
-		cr.stop(); // Benchmarking
+		cr.parar(); // Benchmarking
 		System.out.println("Tiempo para generar el fractal: " + cr.toString()); // Benchmarking
 		cr.reset(); // Benchmarking
 	}// fin calculaLosConjuntos

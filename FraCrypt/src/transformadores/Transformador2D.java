@@ -3,6 +3,11 @@ package transformadores;
 import java.io.File;
 import java.io.IOException;
 
+import fractalFinal.Mandelbrot2D;
+import fractalFinal.Mandelbrot2DCoseno;
+import fractalFinal.Mandelbrot2DModificado;
+import relojes.Cronometro;
+
 /**
  * Implementa la generación de parámetros para 2 dimensiones
  * 
@@ -10,6 +15,65 @@ import java.io.IOException;
  * @version 02.11.2017
  */
 public abstract class Transformador2D extends Transformador {
+	
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @param password
+	 *            la contraseña
+	 * @param archivoOrigen
+	 *            el archivo a transformar
+	 * @param destino
+	 *            la carpeta destino
+	 * @param tamBloques
+	 *            el tamaño de los buffers
+	 * @param tipoDeFractal
+	 *            <ul>
+	 *            <li>0 Mandelbrot original</li>
+	 *            <li>1 Mandelbrot modificado</li>
+	 *            <li>2 Mandelbrot coseno</li>
+	 *            </ul>
+	 * @throws IOException
+	 */
+	public Transformador2D(String password, File archivoOrigen, File destino, int tamBloques,
+			int tipoDeFractal) throws IOException {
+		this.byteLeido = 0;
+		this.tamBloques = tamBloques;
+		sha = creaSha256(password);
+		parametros = setParametros(sha);
+		String nombre = archivoOrigen.getName();
+		String extension = "";
+		encriptando = true;
+		switch (tipoDeFractal) {
+		case 0:
+			this.fractal = new Mandelbrot2D(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			extension = ".f2Do";
+			break;
+		case 1:
+			this.fractal = new Mandelbrot2DModificado(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			extension = ".f2Dm";
+			break;
+		case 2:
+			this.fractal = new Mandelbrot2DCoseno(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			extension = ".f2Dm";
+			break;
+		}
+		if (nombre.endsWith(extension)) {
+			nombre = nombre.substring(0, nombre.length() - 4);
+			encriptando = false;
+		} else {
+			nombre += extension;
+		}
+		Cronometro cr = new Cronometro(); // Benchmarking
+		cr.iniciar(); // Benchmarking
+		transformar(archivoOrigen, destino, nombre);
+		cr.parar(); // Benchmarking
+		System.out.println("Tiempo para encriptar el archivo: " + cr.toString()); // Benchmarking
+		cr.reset(); // Benchmarking
+	}// fin del constructor
 
 	/**
 	 * Realiza la transformación del archivo.
