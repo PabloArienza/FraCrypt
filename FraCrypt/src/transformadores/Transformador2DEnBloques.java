@@ -16,8 +16,6 @@ import fractal.*;
  */
 public class Transformador2DEnBloques extends Transformador2D {
 
-	
-
 	/**
 	 * Constructor de la clase
 	 * 
@@ -32,7 +30,8 @@ public class Transformador2DEnBloques extends Transformador2D {
 	protected void transformar(File archivoOrigen, File destino, String nombre) throws IOException {
 		FileInputStream fis = new FileInputStream(archivoOrigen);
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		if(tamBloques == 0) tamBloques = setTamBloquesAleatorio();
+		if (tamBloques == 0)
+			tamBloques = setTamBloquesAleatorio();
 		// Los datos es extraen en bloques a un buffer
 		byte[] buf = new byte[tamBloques];
 		// Se altera el punto de inicio del algoritmo

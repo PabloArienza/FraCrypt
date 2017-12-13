@@ -15,7 +15,7 @@ import relojes.Cronometro;
 public abstract class TransformadorND extends Transformador {
 
 	protected int caracterLeido;
-	
+
 	/**
 	 * Constructor de la clase
 	 * 
@@ -33,23 +33,15 @@ public abstract class TransformadorND extends Transformador {
 	 *            </ul>
 	 * @throws IOException
 	 */
-	public TransformadorND(String password, File archivoOrigen, File destino, int tamBloques,
-			int tipoDeFractal) throws IOException {
+	public TransformadorND(String password, File archivoOrigen, File destino, int tamBloques, int tipoDeFractal)
+			throws IOException {
 		this.byteLeido = 0;
 		this.tamBloques = tamBloques;
 		sha = creaSha256(password);
 		parametros = setParametros(sha);
-
 		String nombre = archivoOrigen.getName();
-		String extension = "";
 		encriptando = true;
-		switch (tipoDeFractal) {
-		case 0:
-			this.fractal = new FractalNDimensionalSimple(parametros[0], parametros[1], parametros[3][0],
-					parametros[4][0], parametros[5][0]);
-			extension = ".fNDs";
-			break;
-		}
+		String extension = seleccionaFractal(tipoDeFractal);
 		if (nombre.endsWith(extension)) {
 			nombre = nombre.substring(0, nombre.length() - 4);
 			encriptando = false;
@@ -64,18 +56,17 @@ public abstract class TransformadorND extends Transformador {
 		cr.reset(); // Benchmarking
 	}// fin del constructor
 
-	/**
-	 * Realiza la transformación del archivo.
-	 * 
-	 * @param archivoOrigen
-	 *            el archivo a transformar
-	 * @param destino
-	 *            la carpeta en la que se almacenará la transformación
-	 * @param nombre
-	 *            el nombre del archivo transformado
-	 * @throws IOException
-	 */
-	protected abstract void transformar(File archivoOrigen, File destino, String nombre) throws IOException;
+	@Override
+	protected String seleccionaFractal(int tipoDeFractal) {
+		String[] extensiones = { ".fNDs" };
+		switch (tipoDeFractal) {
+		case 0:
+			this.fractal = new FractalNDimensionalSimple(parametros[0], parametros[1], parametros[3][0],
+					parametros[4][0], parametros[5][0]);
+			break;
+		}
+		return extensiones[tipoDeFractal];
+	}
 
 	@Override
 	protected int[][] setParametros(String sha) {
@@ -87,8 +78,7 @@ public abstract class TransformadorND extends Transformador {
 		for (int i = 0; i < numeroDeDimensiones; i++) {
 			shaCortado[0][i] = 10 * creaParametro(0) / numeroDeDimensiones;
 		}
-
-		return null;
+		return shaCortado;
 	}// fin setParametros
 
 	/**

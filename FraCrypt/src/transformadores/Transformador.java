@@ -1,5 +1,7 @@
 package transformadores;
 
+import java.io.File;
+import java.io.IOException;
 import java.security.MessageDigest;
 
 import fractal.*;
@@ -46,6 +48,29 @@ public abstract class Transformador {
 	 */
 	protected abstract int[][] setParametros(String sha);
 
+	/**
+	 * Selecciona el fractal y lo crea.
+	 * 
+	 * @param tipoDeFractal
+	 *            el tipo de fractal
+	 * @return la extensiÛn que llevar· el archivo despuÈs de ser procesado
+	 */
+	protected abstract String seleccionaFractal(int tipoDeFractal);
+
+	
+	/**
+	 * Realiza la transformaci√≥n del archivo.
+	 * 
+	 * @param archivoOrigen
+	 *            el archivo a transformar
+	 * @param destino
+	 *            la carpeta en la que se almacenar√° la transformaci√≥n
+	 * @param nombre
+	 *            el nombre del archivo transformado
+	 * @throws IOException
+	 */
+	protected abstract void transformar(File archivoOrigen, File destino, String nombre) throws IOException;
+	
 	/**
 	 * Genera el hash con el algoritmo SHA256
 	 * 

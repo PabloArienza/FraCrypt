@@ -13,7 +13,7 @@ public class Mandelbrot2DCoseno extends Fractal {
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @see Fractal.java 
+	 * @see Fractal.java
 	 */
 	public Mandelbrot2DCoseno(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite, int escala) {
 		super(dimensiones, coordenadasCentro, iteraciones, limite, escala);
@@ -22,10 +22,9 @@ public class Mandelbrot2DCoseno extends Fractal {
 	@Override
 	public void calculaElConjuntoDelPunto(int[] coordenadas, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
-		float xC = ((float) coordenadas[0] - (float) coordenadasCentro[0]) / (float) escala;
-		float yC = ((float) coordenadas[1] - (float) coordenadasCentro[1]) / (float) escala;
-		float zX = 0;
-		float zY = 0;
+		contadorDePuntos ++;
+		float zX = ((float) coordenadas[0] - (float) coordenadasCentro[0]) / (float) escala;
+		float zY = ((float) coordenadas[1] - (float) coordenadasCentro[1]) / (float) escala;
 		// para el punto c = a + b*i
 		// f(z) = cos(z) + (1/c)
 		// cos(z) = (cos(a) * (e^b+e^-b) / 2) - (sen(a) * (e^b-e^-b)/2)i
@@ -42,7 +41,8 @@ public class Mandelbrot2DCoseno extends Fractal {
 			zY = nY;
 			// La función de escape es x^2 + y^2 < limite
 			if (zX * zX + zY * zY > (float) limite) {
-				addPuntoASuConjunto(new Punto(coordenadas), i);
+				Punto punto = seleccionaTipoDePunto(contadorDePuntos, coordenadas);
+				addPuntoASuConjunto(punto, i);
 				break;
 			}
 		}

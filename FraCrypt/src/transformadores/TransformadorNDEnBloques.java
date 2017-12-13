@@ -16,12 +16,11 @@ import fractal.*;
  */
 public class TransformadorNDEnBloques extends TransformadorND {
 
-	
-/**
- * Constructor de la clase
- * 
- * @see TransformadorND
- */
+	/**
+	 * Constructor de la clase
+	 * 
+	 * @see TransformadorND
+	 */
 	public TransformadorNDEnBloques(String password, File archivoOrigen, File destino, int tamBloques,
 			int tipoDeFractal) throws IOException {
 		super(password, archivoOrigen, destino, tamBloques, tipoDeFractal);

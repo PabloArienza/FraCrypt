@@ -13,7 +13,7 @@ public class Mandelbrot2DModificado extends Fractal {
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @see Fractal.java 
+	 * @see Fractal.java
 	 */
 	public Mandelbrot2DModificado(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite, int escala) {
 		super(dimensiones, coordenadasCentro, iteraciones, limite, escala);
@@ -22,6 +22,7 @@ public class Mandelbrot2DModificado extends Fractal {
 	@Override
 	public void calculaElConjuntoDelPunto(int[] coordenadas, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
+		contadorDePuntos ++;
 		float xC = ((float) coordenadas[0] - (float) coordenadasCentro[0]) / (float) escala;
 		float yC = ((float) coordenadas[1] - (float) coordenadasCentro[1]) / (float) escala;
 		float zX = 0;
@@ -36,7 +37,8 @@ public class Mandelbrot2DModificado extends Fractal {
 			zY = nY;
 			// La función de escape es x^2 - y^2 < limite
 			if (zX * zX - zY * zY > (float) limite) {
-				addPuntoASuConjunto(new Punto(coordenadas), i);
+				Punto punto = seleccionaTipoDePunto(contadorDePuntos, coordenadas);
+				addPuntoASuConjunto(punto, i);
 				break;
 			}
 		}

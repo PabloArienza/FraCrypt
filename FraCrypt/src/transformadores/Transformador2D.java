@@ -15,7 +15,7 @@ import relojes.Cronometro;
  * @version 02.11.2017
  */
 public abstract class Transformador2D extends Transformador {
-	
+
 	/**
 	 * Constructor de la clase
 	 * 
@@ -35,32 +35,15 @@ public abstract class Transformador2D extends Transformador {
 	 *            </ul>
 	 * @throws IOException
 	 */
-	public Transformador2D(String password, File archivoOrigen, File destino, int tamBloques,
-			int tipoDeFractal) throws IOException {
+	public Transformador2D(String password, File archivoOrigen, File destino, int tamBloques, int tipoDeFractal)
+			throws IOException {
 		this.byteLeido = 0;
 		this.tamBloques = tamBloques;
 		sha = creaSha256(password);
 		parametros = setParametros(sha);
 		String nombre = archivoOrigen.getName();
-		String extension = "";
 		encriptando = true;
-		switch (tipoDeFractal) {
-		case 0:
-			this.fractal = new Mandelbrot2D(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
-					parametros[5][0]);
-			extension = ".f2Do";
-			break;
-		case 1:
-			this.fractal = new Mandelbrot2DModificado(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
-					parametros[5][0]);
-			extension = ".f2Dm";
-			break;
-		case 2:
-			this.fractal = new Mandelbrot2DCoseno(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
-					parametros[5][0]);
-			extension = ".f2Dm";
-			break;
-		}
+		String extension = seleccionaFractal(tipoDeFractal);
 		if (nombre.endsWith(extension)) {
 			nombre = nombre.substring(0, nombre.length() - 4);
 			encriptando = false;
@@ -75,18 +58,25 @@ public abstract class Transformador2D extends Transformador {
 		cr.reset(); // Benchmarking
 	}// fin del constructor
 
-	/**
-	 * Realiza la transformación del archivo.
-	 * 
-	 * @param archivoOrigen
-	 *            el archivo a transformar
-	 * @param destino
-	 *            la carpeta en la que se almacenará la transformación
-	 * @param nombre
-	 *            el nombre del archivo transformado
-	 * @throws IOException
-	 */
-	protected abstract void transformar(File archivoOrigen, File destino, String nombre) throws IOException;
+	@Override
+	protected String seleccionaFractal(int tipoDeFractal) {
+		String[] extensiones = { ".f2Do", ".f2Dm", "f2Dc" };
+		switch (tipoDeFractal) {
+		case 0:
+			this.fractal = new Mandelbrot2D(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			break;
+		case 1:
+			this.fractal = new Mandelbrot2DModificado(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			break;
+		case 2:
+			this.fractal = new Mandelbrot2DCoseno(parametros[0], parametros[1], parametros[3][0], parametros[4][0],
+					parametros[5][0]);
+			break;
+		}
+		return extensiones[tipoDeFractal];
+	}
 
 	@Override
 	protected int[][] setParametros(String sha) {

@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import relojes.Cronometro;
 
 /**
- * Genera las distintas listas de puntos necesarios para formar el fractal según
- * la función de escape seleccionada.
+ * Genera las distintas listas de puntos necesarios para formar el fractal
+ * según la función de escape seleccionada.
  * 
  * @author PABLO ARIENZA CARRERA
  * @version 24.08.2017
@@ -14,8 +14,8 @@ import relojes.Cronometro;
 public abstract class Fractal {
 
 	protected ArrayList<ConjuntoDePuntos> fractal;
-	protected int ultimoLeido;
-	
+	protected int ultimoLeido, contadorDePuntos;
+
 	/**
 	 * Constructor de la clase.
 	 * 
@@ -33,6 +33,7 @@ public abstract class Fractal {
 	public Fractal(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite, int escala) {
 		this.fractal = new ArrayList<ConjuntoDePuntos>();
 		this.ultimoLeido = 0;
+		this.contadorDePuntos = 0;
 		calculaLosConjuntos(dimensiones, coordenadasCentro, iteraciones, limite, escala);
 	}// fin del constructor
 
@@ -66,7 +67,8 @@ public abstract class Fractal {
 			int limite, int escala);
 
 	/**
-	 * Añade un punto al conjunto al que pertence en función de su valor de escape.
+	 * Añade un punto al conjunto al que pertence en función de su valor de
+	 * escape.
 	 * 
 	 * @param punto
 	 *            el punto a incluir en un conjunto
@@ -109,10 +111,10 @@ public abstract class Fractal {
 	 */
 	public void calculaLosConjuntos(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
-		
+
 		Cronometro cr = new Cronometro(); // Benchmarking
 		cr.iniciar(); // Benchmarking
-		
+
 		// Conjunto de multiplicadores necesarios para generar iterativamente todos los
 		// puntos del espacio n-dimensional
 		double[] multiplicadores = new double[dimensiones.length];
@@ -155,7 +157,6 @@ public abstract class Fractal {
 	 * @param avance
 	 *            la cantidad de conjuntos que se avanza
 	 */
-
 	public void pasaAlSiguienteConjunto(int avance) {
 		ultimoLeido = (ultimoLeido + avance) % fractal.size();
 		fractal.get(ultimoLeido).pasaAlSiguientePunto();
@@ -190,6 +191,29 @@ public abstract class Fractal {
 		}
 	}// fin setPuntoDeInicio
 
+	/**
+	 * Intercala los tipos de punto dentro del fractal
+	 * 
+	 * @param contador
+	 *            el n�mero de puntos analizados hasta el momento del fractal
+	 * @param coordenadas
+	 *            las coordenadas del punto que se va a generar
+	 * @return el punto creado con su funci�n de mutaci�n en funci�n de su tipo
+	 */
+	protected Punto seleccionaTipoDePunto(int contador, int[] coordenadas) {
+		contador /= 2;
+		Punto tipoDePunto = null;
+		switch (contador) {
+		case 0:
+			tipoDePunto = new PuntoDeMutacionSecuencial(coordenadas);
+			break;
+		case 1:
+			tipoDePunto = new PuntoDeMutacionPorAvance(coordenadas);
+			break;
+		}
+		return tipoDePunto;
+	}
+
 	// ******************************************************************************
 	// Presentación en pantalla. No forma parte del algoritmo.
 
@@ -221,10 +245,10 @@ public abstract class Fractal {
 		System.out.println("Número de conjuntos de puntos: " + numeroDeConjuntos);
 		System.out.println("Número de puntos totales: " + puntosTotales);
 		System.out.println("Número de puntos de interés: " + puntosDelFractal);
-		System.out
-				.println("Tamaño máximo en el conjunto " + conjuntoMayor[0] + " con " + conjuntoMayor[1] + " puntos.");
-		System.out
-				.println("Tamaño mínimo en el conjunto " + conjuntoMenor[0] + " con " + conjuntoMenor[1] + " puntos.");
+		System.out.println(
+				"Tamaño máximo en el conjunto " + conjuntoMayor[0] + " con " + conjuntoMayor[1] + " puntos.");
+		System.out.println(
+				"Tamaño mínimo en el conjunto " + conjuntoMenor[0] + " con " + conjuntoMenor[1] + " puntos.");
 		System.out.println(
 				"Tamaño medio de los conjuntos: " + (double) (puntosDelFractal / numeroDeConjuntos) + " puntos.");
 		System.out.println("Iteraciones de los puntos total: " + iteracionesDePuntos + ". Media por punto: "

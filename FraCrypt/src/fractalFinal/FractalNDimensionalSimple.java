@@ -13,7 +13,7 @@ public class FractalNDimensionalSimple extends Fractal {
 	/**
 	 * Constructor de la clase.
 	 * 
-	 * @see Fractal.java 
+	 * @see Fractal.java
 	 */
 	public FractalNDimensionalSimple(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
@@ -23,6 +23,7 @@ public class FractalNDimensionalSimple extends Fractal {
 	@Override
 	public void calculaElConjuntoDelPunto(int[] coordenadas, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
+		contadorDePuntos ++;
 		float[] coordenadasRelativas = new float[coordenadas.length];
 		// Se transforman las coordenadas absolutas en relativas al punto central del
 		// espacio n-dimensional
@@ -48,7 +49,8 @@ public class FractalNDimensionalSimple extends Fractal {
 				}
 			}
 			if (resultadoFuncion > (float) limite) {
-				addPuntoASuConjunto(new Punto(coordenadas), i);
+				Punto punto = seleccionaTipoDePunto(contadorDePuntos, coordenadas);
+				addPuntoASuConjunto(punto, i);
 				break;
 			}
 		}

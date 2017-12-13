@@ -18,7 +18,7 @@ public class Cronometro {
 	/**
 	 * Almacena el momento en el que se inicia el cronómetro.
 	 */
-	public void iniciar() throws IllegalStateException{
+	public void iniciar() throws IllegalStateException {
 		if (corriendo) {
 			throw new IllegalStateException("No se puede empezar el reloj porque ya ha empezado.");
 		}
@@ -54,7 +54,9 @@ public class Cronometro {
 
 	/**
 	 * Compone el tiempo medido en milisegundos en lenguaje natural.
-	 * @param tiempo medido en milisegundos
+	 * 
+	 * @param tiempo
+	 *            medido en milisegundos
 	 * @return el tiempo en lenguaje natural
 	 */
 	private String formateaElTiempo(long tiempo) {
