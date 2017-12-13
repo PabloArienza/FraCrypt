@@ -25,8 +25,6 @@ public abstract class Transformador2D extends Transformador {
 	 *            el archivo a transformar
 	 * @param destino
 	 *            la carpeta destino
-	 * @param tamBloques
-	 *            el tamaño de los buffers
 	 * @param tipoDeFractal
 	 *            <ul>
 	 *            <li>0 Mandelbrot original</li>
@@ -35,10 +33,8 @@ public abstract class Transformador2D extends Transformador {
 	 *            </ul>
 	 * @throws IOException
 	 */
-	public Transformador2D(String password, File archivoOrigen, File destino, int tamBloques, int tipoDeFractal)
-			throws IOException {
+	public Transformador2D(String password, File archivoOrigen, File destino, int tipoDeFractal) throws IOException {
 		this.byteLeido = 0;
-		this.tamBloques = tamBloques;
 		sha = creaSha256(password);
 		parametros = setParametros(sha);
 		String nombre = archivoOrigen.getName();
@@ -76,7 +72,7 @@ public abstract class Transformador2D extends Transformador {
 			break;
 		}
 		return extensiones[tipoDeFractal];
-	}
+	}// fin seleccionaFractal
 
 	@Override
 	protected int[][] setParametros(String sha) {

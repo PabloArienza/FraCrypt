@@ -67,35 +67,6 @@ public abstract class Fractal {
 			int limite, int escala);
 
 	/**
-	 * Añade un punto al conjunto al que pertence en función de su valor de
-	 * escape.
-	 * 
-	 * @param punto
-	 *            el punto a incluir en un conjunto
-	 * @param iteracion
-	 *            la iteración en la que el punto escapa a la función de escape
-	 */
-	public void addPuntoASuConjunto(Punto punto, int iteracion) {
-		boolean anotado = false;
-		for (ConjuntoDePuntos c : fractal) {
-			busquedasDeConjunto++; // Benchmarking
-			if (c.getiD() == iteracion) {
-				c.addPunto(punto);
-				puntosAConjunto++; // Benchmarking
-				anotado = true;
-				break;
-			}
-		}
-		// Si no existe un conjunto con el valor de escape se crea y se añade el punto
-		if (!anotado) {
-			ConjuntoDePuntos nuevo = new ConjuntoDePuntos(iteracion);
-			nuevo.addPunto(punto);
-			fractal.add(nuevo);
-			puntosAConjunto++; // Benchmarking
-		}
-	}// fin addPuntoASuConjunto
-
-	/**
 	 * Calcula a qué conjunto pertence cada punto del espacio n-dimensional.
 	 * 
 	 * @param dimensiones
@@ -142,6 +113,54 @@ public abstract class Fractal {
 	}// fin calculaLosConjuntos
 
 	/**
+	 * Añade un punto al conjunto al que pertence en función de su valor de
+	 * escape.
+	 * 
+	 * @param punto
+	 *            el punto a incluir en un conjunto
+	 * @param iteracion
+	 *            la iteración en la que el punto escapa a la función de escape
+	 */
+	public void addPuntoASuConjunto(Punto punto, int iteracion) {
+		boolean anotado = false;
+		for (ConjuntoDePuntos c : fractal) {
+			busquedasDeConjunto++; // Benchmarking
+			if (c.getiD() == iteracion) {
+				c.addPunto(punto);
+				puntosAConjunto++; // Benchmarking
+				anotado = true;
+				break;
+			}
+		}
+		// Si no existe un conjunto con el valor de escape se crea y se añade el punto
+		if (!anotado) {
+			ConjuntoDePuntos nuevo = new ConjuntoDePuntos(iteracion);
+			nuevo.addPunto(punto);
+			fractal.add(nuevo);
+			puntosAConjunto++; // Benchmarking
+		}
+	}// fin addPuntoASuConjunto
+
+	/**
+	 * Altera el orden de los conjuntos y los puntos del fractal en función del
+	 * punto desde el que se inicia el algoritmo.
+	 * 
+	 * @param avanceConjuntos
+	 *            el número de conjuntos que se pasan al final de la lista de
+	 *            conjuntos
+	 * @param avancePuntos
+	 *            el número de puntos que se pasan al final del conjunto
+	 */
+	public void setPuntoDeInicio(int avanceConjuntos, int avancePuntos) {
+		for (int i = 0; i < avanceConjuntos; i++) {
+			ConjuntoDePuntos primero = fractal.get(0);
+			fractal.remove(0);
+			fractal.add(primero);
+			fractal.get(0).setPuntoDeInicio(avancePuntos);
+		}
+	}// fin setPuntoDeInicio
+
+	/**
 	 * Devuelve el punto con el que transforma el dato.
 	 * 
 	 * @return el punto con el que transforma el dato
@@ -173,25 +192,6 @@ public abstract class Fractal {
 	}// fin mutarElPunto
 
 	/**
-	 * Altera el orden de los conjuntos y los puntos del fractal en función del
-	 * punto desde el que se inicia el algoritmo.
-	 * 
-	 * @param avanceConjuntos
-	 *            el número de conjuntos que se pasan al final de la lista de
-	 *            conjuntos
-	 * @param avancePuntos
-	 *            el número de puntos que se pasan al final del conjunto
-	 */
-	public void setPuntoDeInicio(int avanceConjuntos, int avancePuntos) {
-		for (int i = 0; i < avanceConjuntos; i++) {
-			ConjuntoDePuntos primero = fractal.get(0);
-			fractal.remove(0);
-			fractal.add(primero);
-			fractal.get(0).setPuntoDeInicio(avancePuntos);
-		}
-	}// fin setPuntoDeInicio
-
-	/**
 	 * Intercala los tipos de punto dentro del fractal
 	 * 
 	 * @param contador
@@ -212,7 +212,7 @@ public abstract class Fractal {
 			break;
 		}
 		return tipoDePunto;
-	}
+	}// fin seleccionaTipoDePunto
 
 	// ******************************************************************************
 	// Presentación en pantalla. No forma parte del algoritmo.
@@ -258,5 +258,6 @@ public abstract class Fractal {
 		for (ConjuntoDePuntos c : fractal)
 			c.imprimeListaDePuntos();
 	}// fin imprimeDatosDelFractal
-		// ******************************************************************************
+	
+	// ******************************************************************************
 }// fin Fractal

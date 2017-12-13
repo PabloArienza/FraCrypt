@@ -14,6 +14,17 @@ public class FractalNDimensionalSimple extends Fractal {
 	 * Constructor de la clase.
 	 * 
 	 * @see Fractal.java
+	 * 
+	 * @param dimensiones
+	 *            el tamaño de las dimensiones del espacio
+	 * @param coordenadasCentro
+	 *            el centro relativo del espacio n-dimensional
+	 * @param iteraciones
+	 *            el número máximo de veces que se iterará cada punto
+	 * @param limite
+	 *            el valor máximo de la función de escape
+	 * @param escala
+	 *            el modificador de la función de escape
 	 */
 	public FractalNDimensionalSimple(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
@@ -23,7 +34,7 @@ public class FractalNDimensionalSimple extends Fractal {
 	@Override
 	public void calculaElConjuntoDelPunto(int[] coordenadas, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
-		contadorDePuntos ++;
+		contadorDePuntos++;
 		float[] coordenadasRelativas = new float[coordenadas.length];
 		// Se transforman las coordenadas absolutas en relativas al punto central del
 		// espacio n-dimensional

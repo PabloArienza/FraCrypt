@@ -63,5 +63,6 @@ public abstract class Punto {
 		puntoParaImprimir = "]";
 		return puntoParaImprimir;
 	}// fin formateaPuntoParaImprimir
+	
 	// ******************************************************************************
 }//fin Punto

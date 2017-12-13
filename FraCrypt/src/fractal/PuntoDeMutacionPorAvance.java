@@ -6,8 +6,16 @@ package fractal;
  * @Author PABLO ARIENZA CARRERA
  * @version 11.12.2017
  */
-public class PuntoDeMutacionPorAvance extends Punto{
+public class PuntoDeMutacionPorAvance extends Punto {
 
+	/**
+	 * Construcción de la clase
+	 * 
+	 * @see Punto.java
+	 * 
+	 * @param coordenadas
+	 *            el arreglo de enteros que forman las coordenadas del punto.
+	 */
 	public PuntoDeMutacionPorAvance(int[] coordenadas) {
 		super(coordenadas);
 	}// fin constructor
@@ -23,5 +31,5 @@ public class PuntoDeMutacionPorAvance extends Punto{
 			}
 			signo = !signo;
 		}
-	}// fin mutarElPunto	
+	}// fin mutarElPunto
 }// fin PuntoDeMutacionPorAvance

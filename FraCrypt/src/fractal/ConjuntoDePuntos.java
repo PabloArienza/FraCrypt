@@ -37,54 +37,6 @@ public class ConjuntoDePuntos {
 	}// fin addPunto
 
 	/**
-	 * Devuelve la identidad del conjunto de puntos.
-	 * 
-	 * @return identidad del conjunto de puntos
-	 */
-	public int getiD() {
-		return iD;
-	}// fin getID
-
-	/**
-	 * Avanza el contador de posición. Si estaba en el último reinicia la lista.
-	 */
-	public void pasaAlSiguientePunto() {
-		ultimoLeido++;
-		if (ultimoLeido >= listaDePuntos.size()) {
-			ultimoLeido = 0;
-		}
-	}// fin pasaAlSiguientePunto
-
-	/**
-	 * Devuelve el punto con el que operar.
-	 * 
-	 * @return el punto con el que operar
-	 */
-	public Punto getPunto() {
-		return listaDePuntos.get(ultimoLeido);
-	}// fin getPunto
-
-	/**
-	 * Llama a la función de mutación del punto
-	 * 
-	 * @param avance
-	 *            el valor del byte que se ha modificado en el tratamiento del
-	 *            archivo
-	 */
-	public void mutarElPunto(int avance) {
-		listaDePuntos.get(ultimoLeido).mutarElPunto(avance);
-	}// fin mutarElPunto
-
-	/**
-	 * Devuelve el número de puntos en el conjunto
-	 * 
-	 * @return el número de puntos en el conjunto
-	 */
-	public int getTamLista() {
-		return listaDePuntos.size();
-	}// fin getTamLista
-
-	/**
 	 * Altera el orden de los puntos del fractal en función del punto desde el que
 	 * se inicia el algoritmo.
 	 * 
@@ -98,7 +50,55 @@ public class ConjuntoDePuntos {
 			listaDePuntos.remove(0);
 			listaDePuntos.add(primero);
 		}
-	}
+	}// fin setPuntoDeInicio
+
+	/**
+	 * Avanza el contador de posición. Si estaba en el último reinicia la lista.
+	 */
+	public void pasaAlSiguientePunto() {
+		ultimoLeido++;
+		if (ultimoLeido >= listaDePuntos.size()) {
+			ultimoLeido = 0;
+		}
+	}// fin pasaAlSiguientePunto
+
+	/**
+	 * Llama a la función de mutación del punto
+	 * 
+	 * @param avance
+	 *            el valor del byte que se ha modificado en el tratamiento del
+	 *            archivo
+	 */
+	public void mutarElPunto(int avance) {
+		listaDePuntos.get(ultimoLeido).mutarElPunto(avance);
+	}// fin mutarElPunto
+
+	/**
+	 * Devuelve la identidad del conjunto de puntos.
+	 * 
+	 * @return identidad del conjunto de puntos
+	 */
+	public int getiD() {
+		return iD;
+	}// fin getID
+
+	/**
+	 * Devuelve el punto con el que operar.
+	 * 
+	 * @return el punto con el que operar
+	 */
+	public Punto getPunto() {
+		return listaDePuntos.get(ultimoLeido);
+	}// fin getPunto
+
+	/**
+	 * Devuelve el número de puntos en el conjunto
+	 * 
+	 * @return el número de puntos en el conjunto
+	 */
+	public int getTamLista() {
+		return listaDePuntos.size();
+	}// fin getTamLista
 
 	// ******************************************************************************
 	// Presentación en pantalla. No forma parte del algoritmo.
@@ -148,5 +148,6 @@ public class ConjuntoDePuntos {
 			}
 		}
 	}// fin imprimeListaDePuntos
-		// ******************************************************************************
+
+	// ******************************************************************************
 }// fin ConjuntoDePuntos

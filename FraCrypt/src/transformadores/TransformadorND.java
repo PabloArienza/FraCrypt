@@ -19,6 +19,8 @@ public abstract class TransformadorND extends Transformador {
 	/**
 	 * Constructor de la clase
 	 * 
+	 * @see Transformador.java
+	 * 
 	 * @param password
 	 *            la contraseña
 	 * @param archivoOrigen
@@ -33,10 +35,8 @@ public abstract class TransformadorND extends Transformador {
 	 *            </ul>
 	 * @throws IOException
 	 */
-	public TransformadorND(String password, File archivoOrigen, File destino, int tamBloques, int tipoDeFractal)
-			throws IOException {
+	public TransformadorND(String password, File archivoOrigen, File destino, int tipoDeFractal) throws IOException {
 		this.byteLeido = 0;
-		this.tamBloques = tamBloques;
 		sha = creaSha256(password);
 		parametros = setParametros(sha);
 		String nombre = archivoOrigen.getName();
@@ -66,7 +66,7 @@ public abstract class TransformadorND extends Transformador {
 			break;
 		}
 		return extensiones[tipoDeFractal];
-	}
+	}// fin seleccionaFractal
 
 	@Override
 	protected int[][] setParametros(String sha) {

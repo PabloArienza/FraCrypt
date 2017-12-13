@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.security.MessageDigest;
 
 import fractal.*;
-import fractalFinal.*;
 
 /**
  * Compone la estructura de los transformadores en diferentes formatos.
@@ -19,7 +18,6 @@ public abstract class Transformador {
 	protected Fractal fractal;
 	protected int byteLeido;
 	protected boolean encriptando;
-	protected int tamBloques;
 
 	/*
 	 * *************************************************************************
@@ -57,7 +55,6 @@ public abstract class Transformador {
 	 */
 	protected abstract String seleccionaFractal(int tipoDeFractal);
 
-	
 	/**
 	 * Realiza la transformación del archivo.
 	 * 
@@ -70,7 +67,7 @@ public abstract class Transformador {
 	 * @throws IOException
 	 */
 	protected abstract void transformar(File archivoOrigen, File destino, String nombre) throws IOException;
-	
+
 	/**
 	 * Genera el hash con el algoritmo SHA256
 	 * 
@@ -127,21 +124,4 @@ public abstract class Transformador {
 	public Fractal getFractal() {
 		return fractal;
 	}// fin getFractal
-
-	/**
-	 * Calcula el tamaño de los bloques cuando el usuario no especifica un tamaño
-	 * concreto.
-	 * 
-	 * @return el tamaño de los bloques
-	 */
-	protected int setTamBloquesAleatorio() {
-		int tamBloquesAleatorio = 0;
-		int i = 0;
-		while (i < parametros[0].length) {
-			tamBloquesAleatorio += parametros[0][i];
-		}
-		tamBloquesAleatorio /= i;
-		return tamBloquesAleatorio;
-	}// fin setTamBloquesAleatorio
-
 }// fin Transformador

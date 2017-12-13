@@ -6,8 +6,16 @@ package fractal;
  * @Author PABLO ARIENZA CARRERA
  * @version 11.12.2017
  */
-public class PuntoDeMutacionSecuencial extends Punto{
+public class PuntoDeMutacionSecuencial extends Punto {
 
+	/**
+	 * Construcción de la clase
+	 * 
+	 * @see Punto.java
+	 * 
+	 * @param coordenadas
+	 *            el arreglo de enteros que forman las coordenadas del punto.
+	 */
 	public PuntoDeMutacionSecuencial(int[] coordenadas) {
 		super(coordenadas);
 	}// fin constructor
@@ -27,5 +35,5 @@ public class PuntoDeMutacionSecuencial extends Punto{
 			}
 			signo = !signo;
 		}
-	}// fin mutarElPunto	
+	}// fin mutarElPunto
 }// fin PuntoDeMutacionSecuencial

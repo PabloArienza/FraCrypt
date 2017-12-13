@@ -14,6 +14,17 @@ public class Mandelbrot2DCoseno extends Fractal {
 	 * Constructor de la clase.
 	 * 
 	 * @see Fractal.java
+	 * 
+	 * @param dimensiones
+	 *            el tamaño de las dimensiones del espacio
+	 * @param coordenadasCentro
+	 *            el centro relativo del espacio n-dimensional
+	 * @param iteraciones
+	 *            el número máximo de veces que se iterará cada punto
+	 * @param limite
+	 *            el valor máximo de la función de escape
+	 * @param escala
+	 *            el modificador de la función de escape
 	 */
 	public Mandelbrot2DCoseno(int[] dimensiones, int[] coordenadasCentro, int iteraciones, int limite, int escala) {
 		super(dimensiones, coordenadasCentro, iteraciones, limite, escala);
@@ -22,7 +33,7 @@ public class Mandelbrot2DCoseno extends Fractal {
 	@Override
 	public void calculaElConjuntoDelPunto(int[] coordenadas, int[] coordenadasCentro, int iteraciones, int limite,
 			int escala) {
-		contadorDePuntos ++;
+		contadorDePuntos++;
 		float zX = ((float) coordenadas[0] - (float) coordenadasCentro[0]) / (float) escala;
 		float zY = ((float) coordenadas[1] - (float) coordenadasCentro[1]) / (float) escala;
 		// para el punto c = a + b*i
